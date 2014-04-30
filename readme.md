@@ -8,7 +8,7 @@ This repository contains the configuration of our unified virtual development en
 Installation Instructions
 -------------------------
 
-Windows users must install the (GitHub Client for Windows)[https://windows.github.com] first. Use the Git Shell for executing the commands listed below!
+Windows users must install the [GitHub Client for Windows](https://windows.github.com) first. Use the Git Shell for executing the commands listed below!
 
 1. Download this repository - click `Download ZIP` in the sidebar of this website and extract it somewhere (or simply `git clone it)
 2. Get [VirtualBox](https://www.virtualbox.org/wiki/Downloads) and install it
