@@ -1,0 +1,52 @@
+---
+
+#
+# Base Settings
+#
+
+locale: en_US.UTF-8
+timezone: UTC
+zsh_theme: muse
+
+e43_repository: https://github.com/EVE-Tools/element43.git
+
+#
+# Database Settings
+#
+
+pg_postgres_password: postgres
+pg_element43_password: element43
+
+pg_port: 5432
+pg_max_connections: 100
+
+pg_shared_buffers: 1GB
+pg_temp_buffers: 12MB
+pg_work_mem: 16MB # http://www.depesz.com/2011/07/03/understanding-postgresql-conf-work_mem/
+pg_maintenance_work_mem: 64MB
+pg_max_stack_depth: 2MB
+
+pg_max_prepared_transactions: 2
+
+pg_random_page_cost: 3.0
+
+pg_effective_cache_size: 2GB
+
+pg_checkpoint_segments: 32
+pg_checkpoint_completion_target: 0.9
+
+pg_wal_buffers: 32MB
+pg_wal_writer_delay: 200ms
+pg_commit_delay: 100
+pg_commit_siblings: 5
+
+#
+# Element43 Specific settings
+#
+
+
+e43_django_settings_module: element43.settings.local
+
+consumer_relay: tcp://relay-eu-germany-1.eve-emdr.com:8050
+consumer_pg_connection_string: tcp://element43:element43@localhost:5432/element43
+consumer_persistent_caching: true

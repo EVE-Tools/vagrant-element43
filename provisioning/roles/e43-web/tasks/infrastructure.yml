@@ -1,0 +1,14 @@
+---
+
+- name: Create logging dir
+  file: path=/var/log/element43 owner=www-data group=www-data state=directory
+
+- name: Configure supervisord
+  template: src=../files/supervisor/supervisord.conf.j2 dest=/etc/supervisor/supervisord.conf
+  notify:
+    - Update supervisord
+
+- name: Add element43 app definitions to supervisord
+  template: src=../files/supervisor/element43.conf.j2 dest=/etc/supervisor/conf.d/element43.conf
+  notify:
+    - Update supervisord

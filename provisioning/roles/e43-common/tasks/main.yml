@@ -1,0 +1,21 @@
+---
+- name: Create system user element43
+  user: name=element43 group=www-data system=yes shell=/bin/false
+
+- name: Add zeromq PPA
+  apt_repository: repo='ppa:chris-lea/zeromq' state=present
+
+- name: Add nodejs PPA
+  apt_repository: repo='ppa:chris-lea/node.js' state=present
+
+- name: Add redis-server PPA
+  apt_repository: repo='ppa:chris-lea/redis-server' state=present
+
+- name: Add PostgreSQL PPA
+  apt_repository: repo='deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main 9.3'
+
+- name: Add PostgreSQL apt key
+  apt_key: url=http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc state=present
+
+- name: Update apt cache
+  apt: update_cache=yes

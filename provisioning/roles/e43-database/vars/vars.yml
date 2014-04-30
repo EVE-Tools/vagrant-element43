@@ -1,0 +1,30 @@
+---
+pg_postgres_password: postgres
+pg_element43_password: element43
+
+pg_port: 5432
+pg_max_connections: 100
+
+pg_shared_buffers: 4GB
+pg_temp_buffers: 128MB
+pg_work_mem: 16MB # http://www.depesz.com/2011/07/03/understanding-postgresql-conf-work_mem/
+pg_maintenance_work_mem: 256MB
+pg_max_stack_depth: 2MB
+
+pg_max_prepared_transactions: 2
+
+pg_random_page_cost: 3.0
+
+pg_effective_cache_size: 12GB
+
+pg_checkpoint_segments: 3
+pg_checkpoint_completion_target: 0.5
+
+pg_wal_buffers: 32MB
+pg_wal_writer_delay: 200ms
+pg_commit_delay: 100
+pg_commit_siblings: 5
+
+consumer_relay: tcp://relay-eu-germany-1.eve-emdr.com:8050
+consumer_pg_connection_string: tcp://element43:element43@localhost:5432/element43
+consumer_persistent_caching: false

@@ -1,0 +1,14 @@
+- name: Install git and zsh
+  apt: pkg=git,zsh,git-core state=latest
+
+- name: Clone oh-my-zsh repo
+  git: repo=git://github.com/robbyrussell/oh-my-zsh.git dest=/home/vagrant/.oh-my-zsh update=no
+
+- name: Clone zsh-syntax-highlighting repo
+  git: repo=git://github.com/zsh-users/zsh-syntax-highlighting.git dest=/home/vagrant/.oh-my-zsh/plugins/zsh-syntax-highlighting update=no
+
+- name: Deploy customized .zshrc
+  template: src=../files/zshrc.j2 dest=/home/vagrant/.zshrc owner=vagrant
+
+- name: Set zsh as default shell
+  user: name=vagrant shell=/bin/zsh

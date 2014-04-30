@@ -1,0 +1,22 @@
+---
+- name: Initial apt-get dist-upgrade
+  apt: update_cache=yes upgrade=dist cache_valid_time=3600
+
+- name: generate locale
+  command: locale-gen {{locale}}
+
+- name: reconfigure locale
+  command: dpkg-reconfigure locales
+
+- name: set locale
+  command: /usr/sbin/update-locale LANG={{locale}} LC_ALL={{locale}}
+
+- name: prepare /etc/localtime
+  command: /bin/cp /usr/share/zoneinfo/{{timezone}} /etc/localtime
+
+- name: set /etc/timezone
+  template: src=../files/timezone.j2 dest=/etc/timezone
+  notify: Update tzdata
+
+- include: zsh.yml
+- include: smb.yml

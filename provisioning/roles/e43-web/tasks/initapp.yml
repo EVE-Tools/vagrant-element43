@@ -1,0 +1,99 @@
+---
+- hosts: vagrant
+  user: vagrant
+  sudo: yes
+  tasks:
+    - name: Stop all element43 processes
+      supervisorctl: name='element43:' state=stopped
+
+    - name: Sync DB
+      django_manage: > 
+        app_path=/home/element43/element43/webapp 
+        pythonpath=/home/element43/element43/webapp 
+        settings={{ e43_django_settings_module }} 
+        virtualenv=/home/element43/virtualenvs/element43
+        command=syncdb
+
+    - name: Let the database catch a breathe for a minute
+      pause: minutes=1
+
+    - name: Migrate eve_db
+      django_manage: > 
+        app_path=/home/element43/element43/webapp 
+        pythonpath=/home/element43/element43/webapp 
+        settings={{ e43_django_settings_module }} 
+        virtualenv=/home/element43/virtualenvs/element43
+        command=migrate 
+        apps=eve_db
+
+    - name: Migrate apps.common
+      django_manage: > 
+        app_path=/home/element43/element43/webapp 
+        pythonpath=/home/element43/element43/webapp 
+        settings={{ e43_django_settings_module }} 
+        virtualenv=/home/element43/virtualenvs/element43
+        command=migrate 
+        apps=apps.common
+
+    - name: Migrate apps.market_data
+      django_manage: > 
+        app_path=/home/element43/element43/webapp 
+        pythonpath=/home/element43/element43/webapp 
+        settings={{ e43_django_settings_module }} 
+        virtualenv=/home/element43/virtualenvs/element43
+        command=migrate 
+        apps=apps.market_data
+
+    - name: Migrate apps.api
+      django_manage: > 
+        app_path=/home/element43/element43/webapp 
+        pythonpath=/home/element43/element43/webapp 
+        settings={{ e43_django_settings_module }} 
+        virtualenv=/home/element43/virtualenvs/element43
+        command=migrate 
+        apps=apps.api
+
+    - name: Migrate djcelery
+      django_manage: > 
+        app_path=/home/element43/element43/webapp 
+        pythonpath=/home/element43/element43/webapp 
+        settings={{ e43_django_settings_module }} 
+        virtualenv=/home/element43/virtualenvs/element43
+        command=migrate 
+        apps=apps.djcelery
+
+    - name: Install unzip
+      apt: pkg=unzip state=latest
+
+    - name: Download SDE from files.zweizeichen.org
+      get_url: url=http://files.zweizeichen.org/dump.zip dest=/tmp/dump.zip
+
+    - name: Unzip SDE
+      command: unzip -o /tmp/dump.zip -d /tmp/eveccpsde/
+
+    - name: Import datadump
+      shell: chdir=/home/element43/element43/webapp /home/element43/virtualenvs/element43/bin/python manage.py eve_import_ccp_dump $(find /tmp/eveccpsde -type f) --settings={{ e43_django_settings_module }} --pythonpath=/home/element43/element43/webapp
+
+    - name: Delete temporary compressed dump
+      file: path=/tmp/dump.zip state=absent
+
+    - name: Delete temporary uncompressed dump
+      file: path=/tmp/eveccpsde state=absent
+
+    - name: Start celery
+      supervisorctl: name='element43:celery-element43' state=started
+
+    - name: Start celerybeat
+      supervisorctl: name='element43:celerybeat-element43' state=started
+
+    - name: Seed DB
+      shell: chdir=/home/element43/element43/webapp /home/element43/virtualenvs/element43/bin/python manage.py initapi --settings={{ e43_django_settings_module }} --pythonpath=/home/element43/element43/webapp
+
+    - name: Start pathfind
+      supervisorctl: name='element43:pathfind-element43' state=started
+
+    - name: Start webapp
+      supervisorctl: name='element43:django-element43' state=started
+
+    - name: Start consumer
+      supervisorctl: name='element43:node-43' state=started

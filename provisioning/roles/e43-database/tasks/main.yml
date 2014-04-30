@@ -1,0 +1,25 @@
+---
+- name: Install the PostgreSQL server, python-psycopg2, build-essential, libpq-dev and libzmq-dev
+  apt: pkg={{item}} state=latest
+  with_items:
+    - postgresql-9.3
+    - python-psycopg2
+    - libzmq-dev
+    - build-essential
+    - libpq-dev
+
+- name: Configure the server
+  template: src=../files/postgresql.conf.j2 dest=/etc/postgresql/9.3/postgresql.conf owner=postgres group=postgres
+  notify: Restart Postgres
+
+- name: Install NodeJS
+  apt: pkg=nodejs state=latest
+
+- name: Clone node-43
+  git: repo=https://github.com/EVE-Tools/node-43.git dest=/home/element43/node-43
+
+- name: Install dependencies
+  npm: path=/home/element43/node-43
+
+- name: Configure node-43
+  template: src=../files/config.js.j2 dest=/home/element43/node-43/config.js

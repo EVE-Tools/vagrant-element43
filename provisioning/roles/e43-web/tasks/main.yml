@@ -1,0 +1,20 @@
+---
+- name: Install python-pip python-dev libevent-dev libmemcached-dev redis-server memcached and supervisor
+  apt: pkg={{item}} state=latest
+  with_items:
+    - python-pip
+    - python-dev
+    - libevent-dev
+    - libmemcached-dev
+    - redis-server
+    - memcached
+    - supervisor
+
+- name: Update pip
+  command: pip install --upgrade pip
+
+- name: Update virtualenv
+  command: pip install --upgrade virtualenv
+
+- name: Install PySCSS
+  pip: name=pyscss

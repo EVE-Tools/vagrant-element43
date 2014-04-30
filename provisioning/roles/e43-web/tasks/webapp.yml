@@ -1,0 +1,12 @@
+---
+- name: Clone/pull element43
+  git: repo={{ e43_repository }} dest=/home/element43/element43
+
+- name: Install dependencies
+  pip: requirements=/home/element43/element43/requirements/local.txt virtualenv=/home/element43/virtualenvs/element43
+
+- name: Configure element43
+  template: src=../files/local.py.j2 dest=/home/element43/element43/webapp/element43/settings/local.py
+
+- name: Configure pathfinding daemon
+  template: src=../files/pathfind.conf.j2 dest=/home/element43/element43/pathfind/pathfind.conf

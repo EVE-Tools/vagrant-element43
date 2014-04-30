@@ -1,0 +1,8 @@
+- name: Set postgres user password
+  postgresql_user: name=postgres password={{ pg_postgres_password }}
+
+- name: Create element43 user
+  postgresql_user: name=element43 password={{ pg_element43_password }}
+
+- name: Create element43 database
+  postgresql_db: name=element43 encoding=UTF-8 owner=element43 state=present

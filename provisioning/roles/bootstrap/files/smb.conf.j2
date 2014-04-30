@@ -1,0 +1,15 @@
+[global]
+  netbios name = Vagrant Development Environment
+  server string = Samba Server for Development
+  workgroup = Workgroup
+
+  map to guest = bad user
+  guest account = element43
+
+[element43]
+  path = /home/element43/
+  writable = yes
+  guest ok = yes
+  public = yes
+  force user = element43
+  force group = www-data

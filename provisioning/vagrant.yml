@@ -1,0 +1,37 @@
+---
+- hosts: all
+  user: vagrant
+  sudo: yes
+  roles:
+    - bootstrap
+    - e43-common
+    - e43-database
+    - e43-web
+  handlers:
+    - name: Update tzdata
+      command: /usr/sbin/dpkg-reconfigure tzdata --frontend noninteractive
+    - name: Restart Postgres
+      service: name=postgresql state=restarted
+
+- hosts: all
+  user: vagrant
+  sudo_user: postgres
+  sudo: yes
+  tasks:
+    - include: roles/e43-database/tasks/bootstrap.yml
+
+- hosts: all
+  user: vagrant
+  sudo_user: element43
+  sudo: yes
+  tasks:
+    - include: roles/e43-web/tasks/webapp.yml
+
+- hosts: all
+  user: vagrant
+  sudo: yes
+  tasks:
+    - include: roles/e43-web/tasks/infrastructure.yml
+  handlers:
+    - name: Update supervisord
+      command: supervisorctl update

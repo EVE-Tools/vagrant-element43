@@ -1,0 +1,5 @@
+- name: Install samba
+  apt: pkg=samba-common,samba state=latest
+
+- name: Configure samba
+  template: src=../files/smb.conf.j2 dest=/etc/samba/smb.conf
