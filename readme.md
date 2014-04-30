@@ -10,7 +10,7 @@ Installation Instructions
 
 Windows users must install the [GitHub Client for Windows](https://windows.github.com) first. Use the Git Shell for executing the commands listed below!
 
-1. Download this repository - click `Download ZIP` in the sidebar of this website and extract it somewhere (or simply `git clone it)
+1. Download this repository - click `Download ZIP` in the sidebar of this website and extract it somewhere (or simply `git clone` it)
 2. Get [VirtualBox](https://www.virtualbox.org/wiki/Downloads) and install it
 3. Get and install [Vagrant](http://www.vagrantup.com/downloads.html) - restart your system, if asked
 4. Run `vagrant plugin install vagrant-vbguest` from command line. It will keep the VirtualBox guest additions on your VM up-to-date.
