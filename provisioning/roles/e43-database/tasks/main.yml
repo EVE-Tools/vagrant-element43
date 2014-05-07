@@ -15,6 +15,10 @@
   template: src=../files/postgresql.conf.j2 dest=/etc/postgresql/9.3/main/postgresql.conf owner=postgres group=postgres
   notify: Restart Postgres
 
+- name: Configure postgres authentication
+  template: src=../files/pg_hba.conf.j2 dest=/etc/postgresql/9.3/main/pg_hba.conf owner=postgres group=postgres
+  notify: Restart Postgres
+
 - name: Install NodeJS
   apt: pkg=nodejs state=latest
 

@@ -63,10 +63,11 @@ Quick Reference
 * Remote File Access: SMB or SFTP
 * Timezone: UTC
 * Shell: ZSH / oh-my-zsh
-* System/Postgres 
-    * User: `element43` 
+* System/Postgres
+    * User: `element43`
     * Password: `element43`
 * Postgres Admin
+	* Connection from host machine: `tcp://postgres:postgres@10.0.13.37:5432/element43`
     * User: `postgres`
     * Password: `postgres`
 * Default EMDR-Network Relay: `tcp://relay-eu-germany-1.eve-emdr.com:8050
