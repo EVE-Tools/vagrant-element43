@@ -8,6 +8,9 @@
     - build-essential
     - libpq-dev
 
+- name: Create logging dir for PostgreSQL
+  file: path=/var/log/element43/postgres owner=postgres group=postgres state=directory
+
 - name: Configure the server
   template: src=../files/postgresql.conf.j2 dest=/etc/postgresql/9.3/main/postgresql.conf owner=postgres group=postgres
   notify: Restart Postgres

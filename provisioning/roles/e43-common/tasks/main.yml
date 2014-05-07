@@ -19,3 +19,6 @@
 
 - name: Update apt cache
   apt: update_cache=yes
+
+- name: Create logging dir
+  file: path=/var/log/element43 owner=www-data group=www-data state=directory

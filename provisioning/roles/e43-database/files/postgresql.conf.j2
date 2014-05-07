@@ -301,17 +301,17 @@ effective_cache_size = {{ pg_effective_cache_size }}
 					# requires logging_collector to be on.
 
 # This is used when logging to stderr:
-#logging_collector = off		# Enable capturing of stderr and csvlog
+logging_collector = on		# Enable capturing of stderr and csvlog
 					# into log files. Required to be on for
 					# csvlogs.
 					# (change requires restart)
 
 # These are only used if logging_collector is on:
-#log_directory = 'pg_log'		# directory where log files are written,
+log_directory = '/var/log/element43/postgres' # directory where log files are written,
 					# can be absolute or relative to PGDATA
 #log_filename = 'postgresql-%Y-%m-%d_%H%M%S.log'	# log file name pattern,
 					# can include strftime() escapes
-#log_file_mode = 0600			# creation mode for log files,
+log_file_mode = 0644			# creation mode for log files,
 					# begin with 0 to use octal notation
 #log_truncate_on_rotation = off		# If on, an existing log file with the
 					# same name as the new log file will be
