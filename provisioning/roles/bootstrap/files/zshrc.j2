@@ -46,3 +46,8 @@ alias node='nocorrect node'
 export PATH=/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+# Move to element43 dir and activate virtualenv
+DJANGO_SETTINGS_MODULE={{ e43_django_settings_module }}
+cd /home/element43/element43/webapp
+source /home/element43/virtualenvs/element43/bin/activate
