@@ -59,6 +59,15 @@
         command=migrate
         apps=apps.api
 
+    - name: Migrate apps.feedreader
+      django_manage: >
+        app_path=/home/element43/element43/webapp
+        pythonpath=/home/element43/element43/webapp
+        settings={{ e43_django_settings_module }}
+        virtualenv=/home/element43/virtualenvs/element43
+        command=migrate
+        apps=apps.feedreader
+
     - name: Migrate djcelery
       django_manage: >
         app_path=/home/element43/element43/webapp
