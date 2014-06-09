@@ -36,7 +36,15 @@ All relevant services are managed by supervisord:
 1. Run `vagrant ssh`
 2. Run `sudo supervisorctl`
 
-*Note: It is recommended to stop the `element43:node-43` process after the first couple of hours. However, it will automatically restart once the VM is rebooted!*
+Service | Autostart | Purpose
+--- | --- | ---
+element43:celery-element43 | Yes | Background task (e.g. EVE API udpates) worker process
+element43:celerybeat-element43 | Yes | Background task scheduler
+element43:django-element43 | Yes | Main web application server
+element43:node-43 | No | EMDR market data collector (resource hungry)
+element43:pathfind-element43 | Yes | Local EVE pathfinding service
+
+*Note: It is recommended to stop the `element43:node-43` process after the first couple of hours.*
 
 Updating your VM
 ----------------
@@ -70,7 +78,7 @@ Quick Reference
 	* Connection from host machine: `tcp://postgres:postgres@10.0.13.37:5432/element43`
     * User: `postgres`
     * Password: `postgres`
-* Default EMDR-Network Relay: `tcp://relay-eu-germany-1.eve-emdr.com:8050
+* Default EMDR-Network Relay: `tcp://relay-eu-germany-1.eve-emdr.com:8050`
 * Service Management: `supervisorctl`
 * Log File Location: `/var/log/element43`
 
