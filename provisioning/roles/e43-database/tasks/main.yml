@@ -23,7 +23,7 @@
   apt: pkg=nodejs state=latest
 
 - name: Clone node-43
-  git: repo=https://github.com/EVE-Tools/node-43.git dest=/home/element43/node-43
+  git: repo=https://github.com/EVE-Tools/node-43.git dest=/home/element43/node-43 accept_hostkey=yes
 
 - name: Install dependencies
   npm: path=/home/element43/node-43

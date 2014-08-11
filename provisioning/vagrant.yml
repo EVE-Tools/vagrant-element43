@@ -22,7 +22,6 @@
 
 - hosts: all
   user: vagrant
-  sudo_user: element43
   sudo: yes
   tasks:
     - include: roles/e43-web/tasks/webapp.yml

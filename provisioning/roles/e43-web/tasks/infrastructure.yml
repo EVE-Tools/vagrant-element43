@@ -9,3 +9,6 @@
   template: src=../files/supervisor/element43.conf.j2 dest=/etc/supervisor/conf.d/element43.conf
   notify:
     - Update supervisord
+
+- name: Set folder permissions
+  file: path=/home/element43 recurse=yes state=directory owner=element43
