@@ -12,70 +12,13 @@
         - 'element43:node-43'
         - 'element43:pathfind-element43'
 
-    - name: Sync DB
-      django_manage: >
-        app_path=/home/element43/element43/webapp
-        pythonpath=/home/element43/element43/webapp
-        settings={{ e43_django_settings_module }}
-        virtualenv=/home/element43/virtualenvs/element43
-        command=syncdb
-
-    - name: Let the database catch a breathe for a minute
-      pause: minutes=1
-
-    - name: Migrate eve_db
+    - name: Initialize database
       django_manage: >
         app_path=/home/element43/element43/webapp
         pythonpath=/home/element43/element43/webapp
         settings={{ e43_django_settings_module }}
         virtualenv=/home/element43/virtualenvs/element43
         command=migrate
-        apps=eve_db
-
-    - name: Migrate apps.common
-      django_manage: >
-        app_path=/home/element43/element43/webapp
-        pythonpath=/home/element43/element43/webapp
-        settings={{ e43_django_settings_module }}
-        virtualenv=/home/element43/virtualenvs/element43
-        command=migrate
-        apps=apps.common
-
-    - name: Migrate apps.market_data
-      django_manage: >
-        app_path=/home/element43/element43/webapp
-        pythonpath=/home/element43/element43/webapp
-        settings={{ e43_django_settings_module }}
-        virtualenv=/home/element43/virtualenvs/element43
-        command=migrate
-        apps=apps.market_data
-
-    - name: Migrate apps.api
-      django_manage: >
-        app_path=/home/element43/element43/webapp
-        pythonpath=/home/element43/element43/webapp
-        settings={{ e43_django_settings_module }}
-        virtualenv=/home/element43/virtualenvs/element43
-        command=migrate
-        apps=apps.api
-
-    - name: Migrate apps.feedreader
-      django_manage: >
-        app_path=/home/element43/element43/webapp
-        pythonpath=/home/element43/element43/webapp
-        settings={{ e43_django_settings_module }}
-        virtualenv=/home/element43/virtualenvs/element43
-        command=migrate
-        apps=apps.feedreader
-
-    - name: Migrate djcelery
-      django_manage: >
-        app_path=/home/element43/element43/webapp
-        pythonpath=/home/element43/element43/webapp
-        settings={{ e43_django_settings_module }}
-        virtualenv=/home/element43/virtualenvs/element43
-        command=migrate
-        apps=apps.djcelery
 
     - name: Install unzip
       apt: pkg=unzip state=latest
