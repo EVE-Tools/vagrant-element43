@@ -22,6 +22,9 @@ Windows users must install the [GitHub Client for Windows](https://windows.githu
 
 You'll be able to access your very own instance of element43 under http://127.0.0.1:8080! Remember to stop `node-43`via `supervisord` if you experience high CPU usage! Relevant logfiles are located at `/var/log/element43`. You can stop your VM with `vagrant halt` on your host system. Simply run `vagrant up` from within the vagrant-element43 directory to turn it on again.
 
+Creating and activating an account
+----------------------------------
+Create a new account as normal and obtain the activation link from the log located at `/var/log/element43/element43.log`. Replace the `https://element-43.com/` part of the activation link with the appropriate address e.g. `http://localhost:8080/`. Open the link to activate your account. All e-mail 'sent' by the the dev instance will be written to the log file.
 
 Simple File Access
 ------------------
