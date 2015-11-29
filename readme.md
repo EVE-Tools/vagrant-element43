@@ -1,7 +1,7 @@
 Vagrant for element43
 =====================
 
-This repository contains the configuration of our unified virtual development environment for element43. This has been tested on Windows 8.1 and Mac OS 10.9.2.
+This repository contains the configuration of our unified virtual development environment for element43. This has been tested on Windows 8.1 and Mac OS 10.11.1.
 
 *THIS VM IS DESIGNED FOR DEVELOPMENT USE ONLY - DO NOT MAKE IT ACCESSIBLE FROM THE INTERNET!*
 
